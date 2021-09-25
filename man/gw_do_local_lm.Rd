@@ -17,7 +17,7 @@ gw_do_local_lm(w, formula, data)
 A vector of coefficient estimates in the order Intercept, Variable 1, Variable 2, etc
 }
 \description{
-Returns the local GWR coefficients for a given bandwidth. This is usually run after the optimal bandwidth has been determined, within the gw_regr function and not as a standalone function.
+Returns the local GWR coefficients for a given bandwidth. This is usually run after the optimal bandwidth has been determined, within the gwregr function and not as a standalone function.
 }
 \examples{
 library(sf)
@@ -29,13 +29,13 @@ formula = as.formula(MedInc ~ PctBach + PctEld)
 dist_mat = as.matrix(dist(st_coordinates(st_centroid(georgia)), upper = T, diag = T))
 obs_index = 70
 bw = 30
-# create the nearby function - see the help for `gw_get_nearby` in the gw_ package
+# create the nearby function - see the help for `gw_get_nearby` in the gw package
 nearby_func = gw_get_nearby(adaptive = TRUE)
 # apply to get an index of locations and get a vector of distances
 index = nearby_func(obs_index, dist_mat, bw)
 dists = dist_mat[obs_index,index]
 # create the weighting function and weight the nearby locations 
-#  - see the help for `gw_get_weight` in the gw_ package
+#  - see the help for `gw_get_weight` in the gw package
 weight_func = gw_get_weight(kernel = "bisquare", adaptive = TRUE)
 # apply the weight function to the distances and extend to a vector of length observations
 w = weight_func(bw, dists)

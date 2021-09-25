@@ -19,7 +19,7 @@ gw_single_bw_gwr(sf_data, adaptive, kernel, eval)
 The evaluation measure, to be minimised in bandwidth evaluation.
 }
 \description{
-This returns a function that evaluates a geographically weighted regression under a given bandwidth. It uses functions from the core gw_verse package (gw_) to specify local observation and selection and weighting functions (get_neraby_func, gw_get_weight) and requires an evaluation function to be specified (see get_lm_eval_fun in this package). The returned function can be used evaluate different bandwidths, for a given regression model formula.
+This returns a function that evaluates a geographically weighted regression under a given bandwidth. It uses functions from the core gwverse package (gw) to specify local observation and selection and weighting functions (get_neraby_func, gw_get_weight) and requires an evaluation function to be specified (see get_lm_eval_fun in this package). The returned function can be used evaluate different bandwidths, for a given regression model formula.
 }
 \examples{
 library(sf)

@@ -7,9 +7,8 @@
 
 # see https://ourcodingclub.github.io/tutorials/writing-r-package/
 # library(devtools)
-# setwd("/Users/geoaco/Desktop/my_docs_mac/leeds_work/research/gw_verse/gw_verse_R/gw_/R)
+# setwd("~/Documents/GitHub/gw_verse/gwregr")
 # load_all(".")
-# setwd("/Users/geoaco/Desktop/my_docs_mac/leeds_work/research/gw_verse/gw_verse_R/gw_")
 # library(roxygen2); # Read in the roxygen2 R package
 # roxygenise();
 
@@ -22,11 +21,12 @@
 #' @examples
 #' library(sf)
 #' data(georgia)
+#' formula = as.formula(MedInc ~ PctBach + PctEld)
 #' # define a distance matrix, a location and an adaptive bandwidth
 #' dist_mat = as.matrix(dist(st_coordinates(st_centroid(georgia)), upper = T, diag = T))
-#' # create the nearby function - see the help for `gw_get_nearby` in the gw_package
+#' # create the nearby function - see the help for `gw_get_nearby` in the gw package
 #' nearby_func = gw_get_nearby(adaptive = TRUE)
-#' # create the weighting function - see the help for `gw_get_weight` in the gw_ package
+#' # create the weighting function - see the help for `gw_get_weight` in the gw package
 #' weight_func = gw_get_weight(kernel = "bisquare", adaptive = TRUE)
 #' # adaptive r fixed bandwidth
 #' adaptive = TRUE
@@ -83,7 +83,7 @@ gw_get_lm_eval = function(eval){
 
 #' Evaluate a single GWR bandwidth
 #' 
-#' This returns a function that evaluates a geographically weighted regression under a given bandwidth. It uses functions from the core gw_verse package (gw_) to specify local observation and selection and weighting functions (get_neraby_func, gw_get_weight) and requires an evaluation function to be specified (see get_lm_eval_fun in this package). The returned function can be used evaluate different bandwidths, for a given regression model formula.   
+#' This returns a function that evaluates a geographically weighted regression under a given bandwidth. It uses functions from the core gwverse package (gw) to specify local observation and selection and weighting functions (get_neraby_func, gw_get_weight) and requires an evaluation function to be specified (see get_lm_eval_fun in this package). The returned function can be used evaluate different bandwidths, for a given regression model formula.   
 #' @param sf_data A point or polygon spatial dataset in sf format, containing the attributes to modelled. 
 #' @param adative A logical value TRUE or FALSE to indicate whether an adaptive or fixed bandwidth distance is being used.
 #' @param kernel The type of distance weighting to be used: one of "bisquare", "gaussian", "exponential", "tricube" or "boxcar".
@@ -123,10 +123,10 @@ gw_single_bw_gwr= function(sf_data, adaptive, kernel, eval) {
   ## 1. Input data 
   dist_mat = as.matrix(dist(st_coordinates(st_centroid(sf_data)), upper = T, diag = T))
   df = st_drop_geometry(sf_data)
-  ## 2. Core - from gw_ 
+  ## 2. Core - from gw
   nearby_func = gw_get_nearby(adaptive)
   weight_func = gw_get_weight(kernel, adaptive)
-  ## 3. Application - gw_regr 
+  ## 3. Application - gwregr 
   eval_func = gw_get_lm_eval(eval)
   # Tidy un-needed objects
   rm(sf_data)
@@ -144,7 +144,7 @@ gw_single_bw_gwr= function(sf_data, adaptive, kernel, eval) {
 
 #' Undertakes a single weighted regression 
 #'
-#' Returns the local GWR coefficients for a given bandwidth. This is usually run after the optimal bandwidth has been determined, within the gw_regr function and not as a standalone function. 
+#' Returns the local GWR coefficients for a given bandwidth. This is usually run after the optimal bandwidth has been determined, within the gwregr function and not as a standalone function. 
 #' @param w A vector of weights with length equal to the number of observations in data. 
 #' @param formula A formula to be used in the regression, with terms contained in the variables names of the input data.
 #' @param data A flat data table in data.frame, matrix or tibble format
@@ -159,13 +159,13 @@ gw_single_bw_gwr= function(sf_data, adaptive, kernel, eval) {
 #' dist_mat = as.matrix(dist(st_coordinates(st_centroid(georgia)), upper = T, diag = T))
 #' obs_index = 70
 #' bw = 30
-#' # create the nearby function - see the help for `gw_get_nearby` in the gw_ package
+#' # create the nearby function - see the help for `gw_get_nearby` in the gw package
 #' nearby_func = gw_get_nearby(adaptive = TRUE)
 #' # apply to get an index of locations and get a vector of distances
 #' index = nearby_func(obs_index, dist_mat, bw)
 #' dists = dist_mat[obs_index,index]
 #' # create the weighting function and weight the nearby locations 
-#' #  - see the help for `gw_get_weight` in the gw_ package
+#' #  - see the help for `gw_get_weight` in the gw package
 #' weight_func = gw_get_weight(kernel = "bisquare", adaptive = TRUE)
 #' # apply the weight function to the distances and extend to a vector of length observations
 #' w = weight_func(bw, dists)
@@ -221,10 +221,10 @@ gw_regr  = function(formula, sf_data, adaptive, kernel, bw) {
   ## 1. Input data related
   dist_mat = as.matrix(dist(st_coordinates(st_centroid(sf_data)), upper = T, diag = T))
   df = st_drop_geometry(sf_data)
-  ## 2 core - ie gw_ related
+  ## 2 core - ie gw related
   nearby_func = gw_get_nearby(adaptive)
   weight_func = gw_get_weight(kernel, adaptive)
-  ## 3. application - gw_regr related
+  ## 3. application - gwregr related
   # gw_do_local_lm in the returned function below
   # Tidy un-needed objects
   rm(sf_data)

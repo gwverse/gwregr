@@ -18,11 +18,12 @@ This returns an evaluation function for use in specifying GWR bandwidths for a g
 \examples{
 library(sf)
 data(georgia)
+formula = as.formula(MedInc ~ PctBach + PctEld)
 # define a distance matrix, a location and an adaptive bandwidth
 dist_mat = as.matrix(dist(st_coordinates(st_centroid(georgia)), upper = T, diag = T))
-# create the nearby function - see the help for `gw_get_nearby` in the gw_package
+# create the nearby function - see the help for `gw_get_nearby` in the gw package
 nearby_func = gw_get_nearby(adaptive = TRUE)
-# create the weighting function - see the help for `gw_get_weight` in the gw_ package
+# create the weighting function - see the help for `gw_get_weight` in the gw package
 weight_func = gw_get_weight(kernel = "bisquare", adaptive = TRUE)
 # adaptive r fixed bandwidth
 adaptive = TRUE
