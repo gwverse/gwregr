@@ -185,11 +185,11 @@ gw_do_local_lm = function(w, formula, data){
 #' Undertakes a GWR  
 #'
 #' Returns a function to undertake GWR once the optimal bandwidth has been defined. 
+#' @param bw The bandwidth (fixed or adaptive), either manually specified or preferably as determined through an evaluation of bandwidths using gw_single_bw_gwr.
 #' @param formula A formula to be used in the regression, with terms contained in the variables names of the input spatial data.
 #' @param sf_data A point or polygon spatial dataset in sf format, containing the attributes to modelled. 
 #' @param adative A logical value TRUE or FALSE to indicate whether an adaptive or fixed bandwidth distance is being used.
 #' @param kernel The type of distance weighting to be used: one of "bisquare", "gaussian", "exponential", "tricube" or "boxcar".
-#' @param bw The bandwidth (fixed or adaptive), either manually specified or preferably as determined through an evaluation of bandwidths using gw_single_bw_gwr.
 #' @return A matrix of coefficient estimates, with each row representing the corresponding location in the input data, and each column the coefficient estimates in the order Intercept, Variable 1, Variable 2, etc as specified in the formula. 
 #' @examples
 #' library(sf)
@@ -206,7 +206,7 @@ gw_do_local_lm = function(w, formula, data){
 #' # return the best result
 #' bw = bwsa[which.min(res)]
 #' # define the final GWR model and run it
-#' gw_regr_final = gw_regr (formula, georgia, adaptive = TRUE, kernel = "bisquare", bw = bw)
+#' gw_regr_final = gw_regr (bw = bw, formula, georgia, adaptive = TRUE, kernel = "bisquare")
 #' coef_mat = gw_regr_final(formula)
 #' # examine the result
 #' head(coef_mat)
@@ -217,7 +217,7 @@ gw_do_local_lm = function(w, formula, data){
 #' tm_shape(georgia)+tm_polygons(c("Intercept","PctBachCE","PctEldCE")) +
 #' tm_layout(legend.position = c("right","top"), frame = F)
 #' @export
-gw_regr  = function(formula, sf_data, adaptive, kernel, bw) {
+gw_regr  = function(bw, formula, sf_data, adaptive, kernel) {
   ## 1. Input data related
   dist_mat = as.matrix(dist(st_coordinates(st_centroid(sf_data)), upper = T, diag = T))
   df = st_drop_geometry(sf_data)
