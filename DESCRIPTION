@@ -1,7 +1,7 @@
 Package: gwregr
 Type: Package
 Title: GWR Package
-Version: 0.0.1.0
+Version: 0.0.1
 Authors@R: person("Lex", "Comber", email = "a.comber@leeds.ac.uk",
                   role = c("aut", "cre"))
            person("Paul", "Harris", email = "paul.harris@rothamsted.ac.uk",
