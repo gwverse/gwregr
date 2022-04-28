@@ -15,6 +15,7 @@ Depends: R (>= 3.1.0), gw
 License: What license is it under?
 LazyData: true
 Imports:
+    gw,
     sf,
     dplyr,
     tmap
