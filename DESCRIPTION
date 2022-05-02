@@ -11,11 +11,10 @@ Authors@R: person("Lex", "Comber", email = "a.comber@leeds.ac.uk",
            person("Chris", "Brunsdon", email = "Christopher.Brunsdon@mu.ie",
                   role = c("aut", "cre"))                  
 Description: This package provide core functionality for other `gw_verse` related packages. 
-Depends: R (>= 3.1.0), gw
+Depends: R (>= 3.1.0), sf
 License: What license is it under?
 LazyData: true
 Imports:
-    sf,
     dplyr,
     tmap
 Remotes:
