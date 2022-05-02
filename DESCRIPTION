@@ -18,4 +18,6 @@ Imports:
     sf,
     dplyr,
     tmap
+Remotes:
+    gw 
 RoxygenNote: 7.1.1
