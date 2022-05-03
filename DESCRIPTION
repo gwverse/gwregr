@@ -8,10 +8,12 @@ Authors@R: person("Lex", "Comber", email = "a.comber@leeds.ac.uk",
                   role = c("aut", "cre"))
            person("Binbin", "Lu", email = "binbinlu@whu.edu.cn",
                   role = c("aut", "cre"))
+           person("Nick", "Malleson", email = "N.S.Malleson@leeds.ac.uk",
+                  role = c("aut", "cre")) 
            person("Chris", "Brunsdon", email = "Christopher.Brunsdon@mu.ie",
                   role = c("aut", "cre"))                  
 Description: This package provide core functionality for other `gw_verse` related packages. 
-Depends: R (>= 3.1.0), gw
+Depends: R (>= 4.2.0), gw (>= 0.0.3)
 License: What license is it under?
 LazyData: true
 Imports:
