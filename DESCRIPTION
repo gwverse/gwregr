@@ -17,8 +17,10 @@ Depends: R (>= 4.2.0), gw
 License: What license is it under?
 LazyData: true
 Imports:
+    gw,
     sf,
     dplyr,
     tmap
-
+Remotes:
+    gw
 RoxygenNote: 7.1.1
